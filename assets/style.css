@@ -1,0 +1,45 @@
+.card-header {
+    color: azure;
+    background-color: transparent;
+    }
+
+.ddk-container img {
+    border-style: none;
+    max-height: -webkit-fill-available;
+    padding: 0px;
+    margin: 0px;
+    }
+
+.ddk-container .layout-logo img {
+    padding: 0px;
+}
+
+.ddk-container h6 {
+    font-size: 12px
+}
+
+.ddk-container h1 {
+    font-size: 20px
+}
+
+.ddk-container h2 {
+    font-size: 17px
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+.ddk-container ::-webkit-scrollbar {
+    width: 0.0em;
+}
+
