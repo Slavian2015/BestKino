@@ -11,7 +11,16 @@ main_path_data = os.path.abspath("./data")
 
 
 def film_items():
-    serverBD = pd.read_csv(main_path_data + '\\server.csv')
+
+
+    if os.path.isfile(main_path_data + '\\server.csv'):
+        serverBD = pd.read_csv(main_path_data + '\\server.csv')
+        pass
+    else:
+        serverBD = pd.read_csv('https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing')
+        serverBD.to_csv(main_path_data + '\\server.csv')
+        pass
+
     cards = []
 
 

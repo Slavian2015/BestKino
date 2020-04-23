@@ -14,19 +14,34 @@ main_path_data = os.path.abspath("./data")
 def cardwindow(app: dash.Dash):
     @app.callback(
         Output('page-content', 'children'),
-        [Input('url', 'pathname')],
-        # [State({'type': 'dynamic-poster', 'index': MATCH}, 'id'),
-        #  State({'type': 'dynamic-poster', 'index': MATCH}, 'n_clicks')]
-    )
+        [Input('url', 'pathname')])
 
     def display_output(pathname):
 
-        all_cardsBD = pd.read_csv(main_path_data + '\\server.csv')
+        if os.path.isfile(main_path_data + '\\server.csv'):
+            all_cardsBD = pd.read_csv(main_path_data + '\\server.csv')
+            pass
+        else:
+            all_cardsBD = pd.read_csv('https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing')
+            all_cardsBD.to_csv(main_path_data + '\\server.csv')
+            pass
+
+        if os.path.isfile(main_path_data + '\\news.csv'):
+            all_newsBD = pd.read_csv(main_path_data + '\\server.csv')
+            pass
+        else:
+            all_newsBD = pd.read_csv('https://drive.google.com/file/d/1RR-SbUa_61_Ohkm6bh3xqqyawnrRsHuV/view?usp=sharing')
+            all_newsBD.to_csv(main_path_data + '\\news.csv')
+            pass
+
+
+
+
+
         for i in all_cardsBD['Mid']:
             if pathname == "/{}".format(i):
                 return film_card(i)
 
-        all_newsBD = pd.read_csv(main_path_data + '\\news.csv')
         for i in all_newsBD['Mid']:
             if pathname == "/{}".format(i):
                 return news_card(i)
