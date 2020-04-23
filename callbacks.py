@@ -1,7 +1,7 @@
 from dash.dependencies import Input, Output, State, ALL, MATCH
 from app import dash_app
 import dash
-from layouts import layout_main
+from layouts import layout_main, admin_tabs
 from News_card import News_main, news_card
 from Film_card import film_card
 import os
@@ -15,8 +15,8 @@ import requests
 dash_app.config['suppress_callback_exceptions'] = True
 main_path_data = os.path.abspath("./data")
 
-url = 'https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing'
-url2 = 'https://drive.google.com/file/d/1RR-SbUa_61_Ohkm6bh3xqqyawnrRsHuV/view?usp=sharing'
+url = 'https://github.com/Slavian2015/BestKino/blob/master/data/server.csv'
+url2 = 'https://github.com/Slavian2015/BestKino/blob/master/data/news.csv'
 s = requests.get(url).text
 s2 = requests.get(url2).text
 
@@ -59,24 +59,60 @@ def cardwindow(app: dash.Dash):
 
         if pathname == '/news':
             return News_main
-        elif pathname == '/all_matches':
-            return layout_main
+        elif pathname == '/admin':
+            return admin_tabs
         elif pathname == '/':
             return layout_main
         else:
             return '404'
 
-# def refresh(app: dash.Dash):
-#
-#     ###############################    RESTART ALL FUNCTIONS     ########################################
-#     @app.callback(Output('table-container', 'children'), [Input('interval', 'n_intervals')])
-#     def trigger_by_modify(n):
-#
-#         PARSER.new_refresh()
-#         Structure.refresh_BD()
-#
-#         print("###############  UPDATE   #########################")
-#         return
+
+# def new_film(app: dash.Dash):
+#     @app.callback(
+#         Output('page-content', 'children'),
+#         [Input('url', 'pathname')])
+
+
+def new_film(app: dash.Dash):
+    @app.callback(
+        [Output({'type': 'id_tab', 'index': MATCH}, 'children'),
+         Output({'type': 'name_tab', 'index': MATCH}, 'value'),
+         Output({'type': 'disc_tab', 'index': MATCH}, 'children'),
+         Output({'type': 'pic_tab', 'index': MATCH}, 'value'),
+         Output({'type': 'youtube_tab', 'index': MATCH}, 'value')],
+        [Input({'type': 'change_btn', 'index': MATCH}, 'n_clicks')],
+        [State({'type': 'change_btn', 'index': MATCH}, 'id'),
+         # State({'type': 'change_btn', 'index': MATCH}, 'value'),
+         ]
+    )
+    def display_output(n_clicks, id):
+
+
+        # if n_clicks is None:
+        #     raise PreventUpdate
+        print('############ ', n_clicks)
+
+        print('############ ', id)
+
+
+        print ('Dropdown222', id['index'])
+
+
+        # print(('Dropdown333 {}'.format(id[0]["index"])))
+        #
+        # print(('Dropdown VALUE {}'.format(value)))
+        # print(('Dropdown n_clicks {}'.format(n_clicks)))
+
+
+
+        return 1,2,3,4,5
+
+
+
+
+
+
 
 cardwindow(dash_app)
-# refresh(dash_app)
+
+new_film(dash_app)

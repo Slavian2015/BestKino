@@ -39,9 +39,9 @@ def film_card(id):
     table = dbc.Table(table_body,
                       bordered=True,
                       dark=True,
-        hover=True,
-        responsive=True,
-        striped=True,)
+                        hover=True,
+                        responsive=True,
+                        striped=True,)
 
 
 
