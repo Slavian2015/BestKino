@@ -9,16 +9,16 @@ import pandas as pd
 import layouts
 from dash.exceptions import PreventUpdate
 from io import StringIO
-import requests
+# import requests
 
 
 dash_app.config['suppress_callback_exceptions'] = True
 main_path_data = os.path.abspath("./data")
 
-url = 'https://github.com/Slavian2015/BestKino/blob/master/data/server.csv'
-url2 = 'https://github.com/Slavian2015/BestKino/blob/master/data/news.csv'
-s = requests.get(url).text
-s2 = requests.get(url2).text
+# url = 'https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/server.csv'
+# url2 = 'https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/news.csv'
+# s = requests.get(url).text
+# s2 = requests.get(url2).text
 
 
 
@@ -33,15 +33,15 @@ def cardwindow(app: dash.Dash):
             all_cardsBD = pd.read_csv(main_path_data + '\\server.csv')
             pass
         else:
-            all_cardsBD = pd.read_csv(StringIO(s))
+            all_cardsBD = pd.read_csv('https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/server.csv')
             all_cardsBD.to_csv(main_path_data + '\\server.csv')
             pass
 
         if os.path.isfile(main_path_data + '\\news.csv'):
-            all_newsBD = pd.read_csv(main_path_data + '\\server.csv')
+            all_newsBD = pd.read_csv(main_path_data + '\\news.csv')
             pass
         else:
-            all_newsBD = pd.read_csv(StringIO(s2))
+            all_newsBD = pd.read_csv("https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/news.csv")
             all_newsBD.to_csv(main_path_data + '\\news.csv')
             pass
 

@@ -9,7 +9,7 @@ import callbacks
 # https://dash-gallery.plotly.host/Docs/packages/dash-design-kit/dash_design_kit-1.4.0.tar.gz
 # --extra-index-url=https://dash-gallery.plotly.host/Docs/packages
 # dash-design-kit==1.4.0
-
+# heroku logs --tail
 
 
 

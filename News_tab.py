@@ -9,7 +9,17 @@ import dash_bootstrap_components as dbc
 from app import dash_app
 
 main_path_data = os.path.abspath("./data")
-all_cardsBD = pd.read_csv(main_path_data + '\\news.csv')
+# all_cardsBD = pd.read_csv(main_path_data + '\\news.csv')
+
+if os.path.isfile(main_path_data + '\\news.csv'):
+    all_cardsBD = pd.read_csv(main_path_data + '\\news.csv')
+    pass
+else:
+    # serverBD = pd.read_csv(StringIO(s.decode('utf-8')))
+    all_cardsBD = pd.read_csv('https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/news.csv')
+
+    all_cardsBD.to_csv(main_path_data + '\\news.csv')
+    pass
 
 
 ###################   ALL   FILMS    #######################

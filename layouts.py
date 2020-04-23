@@ -11,7 +11,7 @@ from Kino_tab import first_tab
 from News_tab import second_tab
 
 main_path_data = os.path.abspath("./data")
-url = 'https://github.com/Slavian2015/BestKino/blob/master/data/server.csv'
+# url = 'https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/server.csv'
 # s = requests.get(url).content
 
 
@@ -23,7 +23,7 @@ def film_items():
         pass
     else:
         # serverBD = pd.read_csv(StringIO(s.decode('utf-8')))
-        serverBD = pd.read_csv("https://raw.github.com/Slavian2015/BestKino/blob/master/data/server.csv")
+        serverBD = pd.read_csv("https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/server.csv")
 
         serverBD.to_csv(main_path_data + '\\server.csv')
         pass
