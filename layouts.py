@@ -8,7 +8,8 @@ from app import dash_app
 import pandas as pd
 from io import StringIO
 import requests
-
+from Kino_tab import first_tab
+from News_tab import second_tab
 
 main_path_data = os.path.abspath("./data")
 url = 'https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing'
@@ -208,4 +209,26 @@ layout_main = ddk.Block(width=100,
                                       children=[]),
 ])
 
+
+
+
+
+############################     TABS    ###################################
+
+admin_tabs = dcc.Tabs(children=[first_tab, second_tab])
+
+
+match_card = ddk.Block(width=100,
+                       style={'height': '93vh',
+                              'text-align': 'center'},
+                       children=[
+                           ddk.Block(width=100,
+                                     style={'height': '89vh', 'margin': '0',
+                                            'padding': '0', 'color': 'azure',
+                                            'overflowY': 'scroll',
+                                            'overflowX': 'hidden', },
+                                     children=[ddk.Card(style={'width': '-webkit-fill-available',
+                                        'margin': '10px', 'padding': '0',
+                                        'background-color': '#f9f9f91c', },
+                                                        children=admin_tabs)])])
 
