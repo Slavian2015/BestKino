@@ -7,13 +7,12 @@ import os
 from app import dash_app
 import pandas as pd
 from io import StringIO
-import requests
 from Kino_tab import first_tab
 from News_tab import second_tab
 
 main_path_data = os.path.abspath("./data")
 url = 'https://github.com/Slavian2015/BestKino/blob/master/data/server.csv'
-s = requests.get(url).content
+# s = requests.get(url).content
 
 
 def film_items():
