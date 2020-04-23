@@ -6,8 +6,13 @@ import uuid
 import os
 from app import dash_app
 import pandas as pd
-main_path_data = os.path.abspath("./data")
+from io import StringIO
+import requests
 
+
+main_path_data = os.path.abspath("./data")
+url = 'https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing'
+s = requests.get(url).text
 
 
 def film_items():
@@ -17,7 +22,7 @@ def film_items():
         serverBD = pd.read_csv(main_path_data + '\\server.csv')
         pass
     else:
-        serverBD = pd.read_csv('https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing')
+        serverBD = pd.read_csv(StringIO(s))
         serverBD.to_csv(main_path_data + '\\server.csv')
         pass
 

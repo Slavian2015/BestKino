@@ -8,8 +8,19 @@ import os
 import pandas as pd
 import layouts
 from dash.exceptions import PreventUpdate
+from io import StringIO
+import requests
+
+
 dash_app.config['suppress_callback_exceptions'] = True
 main_path_data = os.path.abspath("./data")
+
+url = 'https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing'
+url2 = 'https://drive.google.com/file/d/1RR-SbUa_61_Ohkm6bh3xqqyawnrRsHuV/view?usp=sharing'
+s = requests.get(url).text
+s2 = requests.get(url2).text
+
+
 
 def cardwindow(app: dash.Dash):
     @app.callback(
@@ -22,7 +33,7 @@ def cardwindow(app: dash.Dash):
             all_cardsBD = pd.read_csv(main_path_data + '\\server.csv')
             pass
         else:
-            all_cardsBD = pd.read_csv('https://drive.google.com/file/d/1I5QvFQ6fofCQgVwADMYIYpfWEQc6rMgy/view?usp=sharing')
+            all_cardsBD = pd.read_csv(StringIO(s))
             all_cardsBD.to_csv(main_path_data + '\\server.csv')
             pass
 
@@ -30,7 +41,7 @@ def cardwindow(app: dash.Dash):
             all_newsBD = pd.read_csv(main_path_data + '\\server.csv')
             pass
         else:
-            all_newsBD = pd.read_csv('https://drive.google.com/file/d/1RR-SbUa_61_Ohkm6bh3xqqyawnrRsHuV/view?usp=sharing')
+            all_newsBD = pd.read_csv(StringIO(s2))
             all_newsBD.to_csv(main_path_data + '\\news.csv')
             pass
 
