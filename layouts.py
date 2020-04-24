@@ -68,7 +68,11 @@ def film_items():
 
 
 ##########################        MAIN PAGE      ##############################
-layout_main = ddk.Block(width=100,
+
+
+def main_page():
+
+    layout_main = ddk.Block(width=100,
                         style={'height': '93vh','margin':'0',
                                        'padding':'0',
                          'text-align':'center'},
@@ -103,7 +107,7 @@ layout_main = ddk.Block(width=100,
                                                              'vertical-align': '-webkit-baseline-middle'})]),
                                     ddk.Block(width=100,
                                               style={'margin': '0', 'padding': '0'},
-                                              children=[html.H2("Смотрите сегодня, 21.04.2020")]),
+                                              children=[html.H2("Смотрите сегодня, 26.04.2020")]),
                                     ddk.Block(width=100,
                                               style={'margin':'0','padding':'0'},
                                               children=[ddk.Block(width=100,
@@ -209,6 +213,8 @@ layout_main = ddk.Block(width=100,
                                              'justify': 'center'},
                                       children=[]),
 ])
+
+    return layout_main
 
 
 

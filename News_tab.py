@@ -10,43 +10,47 @@ from app import dash_app
 
 main_path_data = os.path.abspath("./data")
 # all_cardsBD = pd.read_csv(main_path_data + '\\news.csv')
+def new():
+    if os.path.isfile(main_path_data + '\\news.csv'):
+        all_cardsBD = pd.read_csv(main_path_data + '\\news.csv')
+        return all_cardsBD
+    else:
+        # serverBD = pd.read_csv(StringIO(s.decode('utf-8')))
+        all_cardsBD = pd.read_csv('https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/news.csv')
 
-if os.path.isfile(main_path_data + '\\news.csv'):
-    all_cardsBD = pd.read_csv(main_path_data + '\\news.csv')
-    pass
-else:
-    # serverBD = pd.read_csv(StringIO(s.decode('utf-8')))
-    all_cardsBD = pd.read_csv('https://raw.githubusercontent.com/Slavian2015/BestKino/master/data/news.csv')
-
-    all_cardsBD.to_csv(main_path_data + '\\news.csv')
-    pass
+        all_cardsBD.to_csv(main_path_data + '\\news.csv')
+        return all_cardsBD
 
 
 ###################   ALL   FILMS    #######################
-rows = []
+def news_list():
+    all_cardsBD = new()
+    rows = []
 
-rows.append(html.Tr([html.Td("№", style={'text-align': 'center'}),
-                     html.Td("Название", style={'text-align': 'center'}),
-                    html.Td("Дата создания", style={'text-align': 'center'}),
-                    html.Td("Статус", style={'text-align': 'center'}),
-                    html.Td("Редактировать", style={'text-align': 'center'}),
-                    html.Td("Удалить", style={'text-align': 'center'})]))
-for ind in all_cardsBD.index:
-    rows.append(html.Tr([html.Td(ind, style={'text-align': 'center'}),
-                     html.Td(all_cardsBD['name'][ind], style={'text-align': 'center', 'max-width':'250px'}),
-                    html.Td(all_cardsBD['date'][ind], style={'text-align': 'center','max-width':'82px'}),
-                         html.Td(all_cardsBD['status'][ind], style={'text-align': 'center', 'max-width': '82px'}),
+    rows.append(html.Tr([html.Td("№", style={'text-align': 'center'}),
+                         html.Td("Название", style={'text-align': 'center'}),
+                        html.Td("Дата создания", style={'text-align': 'center'}),
+                        html.Td("Статус", style={'text-align': 'center'}),
+                        html.Td("Редактировать", style={'text-align': 'center'}),
+                        html.Td("Удалить", style={'text-align': 'center'})]))
+    for ind in all_cardsBD.index:
+        rows.append(html.Tr([html.Td(ind, style={'text-align': 'center'}),
+                         html.Td(all_cardsBD['name'][ind], style={'text-align': 'center', 'max-width':'250px'}),
+                        html.Td(all_cardsBD['date'][ind], style={'text-align': 'center','max-width':'82px'}),
+                             html.Td(all_cardsBD['status'][ind], style={'text-align': 'center', 'max-width': '82px'}),
 
-                    html.Td(style={'text-align': 'center'}, children=[html.Button("Редактировать", style={'text-align': 'center','max-width': '140px','font-size': '8px'}, n_clicks=0, id={'type':"change_news_btn", 'index':ind})]),
-                    html.Td(style={'text-align': 'center'}, children=[html.Button("Удалить", style={'text-align': 'center','max-width': '80px','font-size': '8px'}, n_clicks=0, id={'type':"delet_news_btn", 'index':ind})])]))
+                        html.Td(style={'text-align': 'center'}, children=[html.Button("Редактировать", style={'text-align': 'center','max-width': '140px','font-size': '8px'}, n_clicks=0, id={'type':"change_news_btn", 'index':ind})]),
+                        html.Td(style={'text-align': 'center'}, children=[html.Button("Удалить", style={'text-align': 'center','max-width': '80px','font-size': '8px'}, n_clicks=0, id={'type':"delet_news_btn", 'index':ind})])]))
 
-table_body = [html.Tbody(rows)]
-table = dbc.Table(table_body,
-                  bordered=True,
-                  dark=True,
-                  hover=True,
-                  responsive=True,
-                  striped=True)
+    table_body = [html.Tbody(rows)]
+    table = dbc.Table(table_body,
+                      bordered=True,
+                      dark=True,
+                      hover=True,
+                      responsive=True,
+                      striped=True)
+
+    return table
 
 
 ###################   FILMS  CHANGE / NEW  #######################
@@ -70,8 +74,9 @@ ddk.Block(style={'text-align':'center', 'margin-top': '10px'},children=[html.But
 
 news_block = ddk.Block(children=[
                             ddk.Block(width=50,
+                                      id='news_list',
                                       style={'padding': '10px'},
-                                      children=[table]),
+                                      children=[news_list()]),
                             ddk.Block(width=50,
                                       children=[chenges])
 ])
